@@ -104,17 +104,35 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Seventh Query ==================>
   // <================== Find all the male users who can speak Hindi or English and female users who can speak Kannada or German ==================>
+  // const userList = await user.find({
+  //   $or: [
+  //     { gender: "Male", language: { $in: ["English", "Hindi"] } },
+  //     { gender: "Female", language: { $in: ["Kannada, German"] } },
+  //   ],
+  // });
+  // const users = await user
+  //   .find({
+  //     $or: [
+  //       { gender: "Male", language: "English" },
+  //       { gender: "Female", language: "Hindi" },
+  //     ],
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Eighth Query ==================>
+  // <================== Find all the female users who can speak Bengali who wear shirt size XL and male users who speak German and wear shirt size either L or M ==================>
   const userList = await user.find({
     $or: [
-      { gender: "Male", language: { $in: ["English", "Hindi"] } },
-      { gender: "Female", language: { $in: ["Kannada, German"] } },
+      { gender: "Female", language: "Bengali", shirt_size: "XL" },
+      { gender: "Male", language: "German", shirt_size: { $in: ["M", "L"] } },
     ],
   });
   const users = await user
     .find({
       $or: [
-        { gender: "Male", language: "English" },
-        { gender: "Female", language: "Hindi" },
+        { gender: "Female", language: "Bengali", shirt_size: "XL" },
+        { gender: "Male", language: "German", shirt_size: { $in: ["M", "L"] } },
       ],
     })
     .count();

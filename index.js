@@ -12,12 +12,26 @@ server.get("/", async (req, res) => {
 server.post("/users", async (req, res) => {
   // <================== First Query ==================>
   // <================== Find all the female users ==================>
+  // const userList = await user.find({
+  //   gender: "Female",
+  // });
+  // const users = await user
+  //   .find({
+  //     gender: "Female",
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Second Query ==================>
+  // <================== Find all the female users who speak one of the two languages Kannada, Hindi ==================>
   const userList = await user.find({
     gender: "Female",
+    $or: [{ language: "Kannada" }, { language: "Hindi" }],
   });
   const users = await user
     .find({
       gender: "Female",
+      $or: [{ language: "Kannada" }, { language: "Hindi" }],
     })
     .count();
   res.status(200).send(userList);

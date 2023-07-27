@@ -24,14 +24,36 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Second Query ==================>
   // <================== Find all the female users who speak one of the two languages Kannada, Hindi ==================>
+  // const userList = await user.find({
+  //   gender: "Female",
+  //   $or: [{ language: "Kannada" }, { language: "Hindi" }],
+  //   ================ or ========================
+  //   language: {$in: ["Kannada", "Hindi"]}
+  // });
+  // const users = await user
+  //   .find({
+  //     gender: "Female",
+  //     $or: [{ language: "Kannada" }, { language: "Hindi" }],
+  //     ================ or ========================
+  //     language: {$in: ["Kannada", "Hindi"]}
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Third Query ==================>
+  // <================== Find all the male users who can speak Hindi and female users who can speak Kannada ==================>
   const userList = await user.find({
-    gender: "Female",
-    $or: [{ language: "Kannada" }, { language: "Hindi" }],
+    $or: [
+      { gender: "Male", language: "Hindi" },
+      { gender: "Female", language: "Kannada" },
+    ],
   });
   const users = await user
     .find({
-      gender: "Female",
-      $or: [{ language: "Kannada" }, { language: "Hindi" }],
+      $or: [
+        { gender: "Male", language: "Hindi" },
+        { gender: "Female", language: "Kannada" },
+      ],
     })
     .count();
   res.status(200).send(userList);

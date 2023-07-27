@@ -42,18 +42,30 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Third Query ==================>
   // <================== Find all the male users who can speak Hindi and female users who can speak Kannada ==================>
+  // const userList = await user.find({
+  //   $or: [
+  //     { gender: "Male", language: "Hindi" },
+  //     { gender: "Female", language: "Kannada" },
+  //   ],
+  // });
+  // const users = await user
+  //   .find({
+  //     $or: [
+  //       { gender: "Male", language: "Hindi" },
+  //       { gender: "Female", language: "Kannada" },
+  //     ],
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Fourth Query ==================>
+  // <================== Find all the users who wear the shirt size S ==================>
   const userList = await user.find({
-    $or: [
-      { gender: "Male", language: "Hindi" },
-      { gender: "Female", language: "Kannada" },
-    ],
+    shirt_size: "S",
   });
   const users = await user
     .find({
-      $or: [
-        { gender: "Male", language: "Hindi" },
-        { gender: "Female", language: "Kannada" },
-      ],
+      shirt_size: "S",
     })
     .count();
   res.status(200).send(userList);

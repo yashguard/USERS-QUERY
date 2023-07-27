@@ -60,12 +60,26 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Fourth Query ==================>
   // <================== Find all the users who wear the shirt size S ==================>
+  // const userList = await user.find({
+  //   shirt_size: "S",
+  // });
+  // const users = await user
+  //   .find({
+  //     shirt_size: "S",
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Fifth Query ==================>
+  // <================== Find all the female users who wear the shirt size XL ==================>
   const userList = await user.find({
-    shirt_size: "S",
+    gender: "Female",
+    shirt_size: "XL",
   });
   const users = await user
     .find({
-      shirt_size: "S",
+      gender: "Female",
+      shirt_size: "XL",
     })
     .count();
   res.status(200).send(userList);

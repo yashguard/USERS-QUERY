@@ -86,10 +86,28 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Sixth Query ==================>
   // <================== Find all the English speaking male users and Hindi speaking female users ==================>
+  // const userList = await user.find({
+  //   $or: [
+  //     { gender: "Male", language: "English" },
+  //     { gender: "Female", language: "Hindi" },
+  //   ],
+  // });
+  // const users = await user
+  //   .find({
+  //     $or: [
+  //       { gender: "Male", language: "English" },
+  //       { gender: "Female", language: "Hindi" },
+  //     ],
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Seventh Query ==================>
+  // <================== Find all the male users who can speak Hindi or English and female users who can speak Kannada or German ==================>
   const userList = await user.find({
     $or: [
-      { gender: "Male", language: "English" },
-      { gender: "Female", language: "Hindi" },
+      { gender: "Male", language: { $in: ["English", "Hindi"] } },
+      { gender: "Female", language: { $in: ["Kannada, German"] } },
     ],
   });
   const users = await user

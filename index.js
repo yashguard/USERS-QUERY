@@ -140,18 +140,32 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Ninth Query ==================>
   // <================== Find all the female users who speak any of the Indian languages (Hindi, Punjabi, Bengali, Gujarati, Tamil, Malayalam) ==================>
+  // const userList = await user.find({
+  //   gender: "Female",
+  //   language: {
+  //     $in: ["Hindi", "Punjabi", "Bengali", "Gujarati", "Tamil", "Malayalam"],
+  //   },
+  // });
+  // const users = await user
+  //   .find({
+  //     gender: "Female",
+  //     language: {
+  //       $in: ["Hindi", "Punjabi", "Bengali", "Gujarati", "Tamil", "Malayalam"],
+  //     },
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Tenth Query ==================>
+  // <================== Men who can speak Korean ==================>
   const userList = await user.find({
-    gender: "Female",
-    language: {
-      $in: ["Hindi", "Punjabi", "Bengali", "Gujarati", "Tamil", "Malayalam"],
-    },
+    gender: "Male",
+    language: "Korean",
   });
   const users = await user
     .find({
-      gender: "Female",
-      language: {
-        $in: ["Hindi", "Punjabi", "Bengali", "Gujarati", "Tamil", "Malayalam"],
-      },
+      gender: "Male",
+      language: "Korean",
     })
     .count();
   res.status(200).send(userList);

@@ -72,14 +72,32 @@ server.post("/users", async (req, res) => {
   // console.log(users);
   // <================== Fifth Query ==================>
   // <================== Find all the female users who wear the shirt size XL ==================>
+  // const userList = await user.find({
+  //   gender: "Female",
+  //   shirt_size: "XL",
+  // });
+  // const users = await user
+  //   .find({
+  //     gender: "Female",
+  //     shirt_size: "XL",
+  //   })
+  //   .count();
+  // res.status(200).send(userList);
+  // console.log(users);
+  // <================== Sixth Query ==================>
+  // <================== Find all the English speaking male users and Hindi speaking female users ==================>
   const userList = await user.find({
-    gender: "Female",
-    shirt_size: "XL",
+    $or: [
+      { gender: "Male", language: "English" },
+      { gender: "Female", language: "Hindi" },
+    ],
   });
   const users = await user
     .find({
-      gender: "Female",
-      shirt_size: "XL",
+      $or: [
+        { gender: "Male", language: "English" },
+        { gender: "Female", language: "Hindi" },
+      ],
     })
     .count();
   res.status(200).send(userList);
